@@ -42,3 +42,6 @@ Thumbs.db
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+
+.vercel
+.env*
