@@ -13,9 +13,10 @@ export type LinkItem = {
 };
 
 export const profile: Profile = {
-  name: "바이브코더",
-  bio: "꿈을 먹고 사는 냉혹한 바이브코더",
-  imageSrc: "/profile.svg", // 실제 사진은 public/ 에 넣고 경로만 바꾸세요.
+  name: "김상은",
+  bio: "플스택 개발자 | 요즘에는 AI 개발중",
+  // 외부 이미지는 next.config.ts 의 images.remotePatterns 에 호스트를 등록해야 합니다.
+  imageSrc: "https://placehold.co/160x160/orange/white/png",
 };
 
 // TODO: 실제 주소로 바꾸세요.

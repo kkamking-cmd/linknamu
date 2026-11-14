@@ -1,26 +1,63 @@
 @import "tailwindcss";
 
+/* 따뜻한 크림 → 살구 톤. 색은 여기서만 바꾸면 화면 전체에 반영됩니다. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-from: #fffaf2; /* 크림 */
+  --bg-to: #ffe3d1; /* 연한 살구 */
+  --bg-glow-1: rgb(255 214 186 / 0.4);
+  --bg-glow-2: rgb(255 236 214 / 0.8);
+
+  --ink: #3b2a22; /* 본문 글자(따뜻한 짙은 갈색) */
+  --ink-muted: #8c7062;
+  --accent: #e07a4f; /* 포커스 테두리 */
+
+  --glass: rgb(255 255 255 / 0.42);
+  --glass-hover: rgb(255 255 255 / 0.62);
+  --glass-border: rgb(255 255 255 / 0.75);
+  --card-shadow: 0 1px 2px rgb(120 70 40 / 0.04), 0 10px 28px -14px rgb(150 80 40 / 0.22);
+  --card-shadow-hover: 0 1px 2px rgb(120 70 40 / 0.05), 0 14px 32px -14px rgb(150 80 40 / 0.3);
+  --avatar-shadow: 0 18px 40px -16px rgb(170 90 40 / 0.45), 0 2px 6px rgb(120 70 40 / 0.08);
+}
+
+/* 기기의 다크 모드와 상관없이 항상 이 따뜻한 밝은 톤으로 보여 줍니다. */
+:root {
+  color-scheme: light;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-accent: var(--accent);
+  --color-glass: var(--glass);
+  --color-glass-hover: var(--glass-hover);
+  --color-glass-border: var(--glass-border);
+  --shadow-card: var(--card-shadow);
+  --shadow-card-hover: var(--card-shadow-hover);
+  --shadow-avatar: var(--avatar-shadow);
+  --font-sans:
+    "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  background-color: var(--bg-from);
+  font-family: var(--font-sans);
+  word-break: keep-all;
+}
+
+/* 배경 그라데이션은 화면에 고정(모바일 Safari에서 background-attachment: fixed 가 불안정해서 가상 요소 사용) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(90% 60% at 0% 0%, var(--bg-glow-1), transparent 75%),
+    radial-gradient(80% 60% at 100% 100%, var(--bg-glow-2), transparent 75%),
+    linear-gradient(165deg, var(--bg-from) 0%, var(--bg-to) 100%);
+}
+
+::selection {
+  background: rgb(224 122 79 / 0.25);
 }
